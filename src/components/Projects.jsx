@@ -1,15 +1,17 @@
 import SectionHeading from "./SectionHeading";
 import ProjectCard from "./ProjectCard";
 import { projects } from "../data";
+import { useContent } from "../i18n";
 
 export default function Projects() {
+  const c = useContent().projects;
   return (
     <section id="projects" className="dark">
       <div className="w">
-        <SectionHeading n="03" t="Featured Projects" />
-        <p className="sub">Explore my data analysis and visualization projects. Each project includes real data, clean analysis and interactive dashboards (where applicable).</p>
+        <SectionHeading n="03" t={c.title} />
+        <p className="sub">{c.sub}</p>
         <div className="proj">
-          {projects.map((p) => <ProjectCard key={p.title + p.subtitle} {...p} />)}
+          {projects.map((p, i) => <ProjectCard key={i} {...p} {...c.items[i]} />)}
         </div>
       </div>
     </section>

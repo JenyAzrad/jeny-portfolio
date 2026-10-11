@@ -1,24 +1,27 @@
 import SectionHeading from "./SectionHeading";
 import { GitHubIcon } from "./Icons";
-import { EMAIL, GITHUB_PROFILE, LINKEDIN, NAV } from "../data";
+import { EMAIL, GITHUB_PROFILE, LINKEDIN, NAV_IDS } from "../data";
+import { useContent } from "../i18n";
 
 export default function Contact() {
+  const all = useContent();
+  const c = all.contact;
   return (
     <section id="contact" className="dark">
       <div className="w">
-        <SectionHeading n="06" t="Let's Connect" />
+        <SectionHeading n="06" t={c.title} />
         <div className="conn">
-          <p>I'm currently looking for opportunities as a Data Analyst / BI Analyst where I can combine data analysis, technology and visualization.</p>
+          <p>{c.text}</p>
           <div className="cta">
-            <a className="btn o" href={GITHUB_PROFILE} target="_blank" rel="noopener"><GitHubIcon />GitHub →</a>
-            <a className="btn o" href={LINKEDIN} target="_blank" rel="noopener">LinkedIn →</a>
-            <a className="btn o" href={"mailto:" + EMAIL}>Email →</a>
+            <a className="btn o" href={GITHUB_PROFILE} dir="ltr" target="_blank" rel="noopener"><GitHubIcon />{c.github}</a>
+            <a className="btn o" href={LINKEDIN} dir="ltr" target="_blank" rel="noopener">{c.linkedin}</a>
+            <a className="btn o" href={"mailto:" + EMAIL}>{c.email}</a>
           </div>
         </div>
-        <p className="sign">Thanks for visiting! Jeny</p>
+        <p className="sign">{c.sign}</p>
         <footer>
-          <span><b style={{ color: "#fff" }}>Jeny Azrad</b> | Data Analyst</span>
-          <nav>{NAV.map(([name, id]) => <a key={id} href={"#" + id}>{name}</a>)}</nav>
+          <span><b style={{ color: "#fff" }}>{all.name}</b> | {all.role}</span>
+          <nav>{NAV_IDS.map((id, i) => <a key={id} href={"#" + id}>{all.nav[i]}</a>)}</nav>
         </footer>
       </div>
     </section>

@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import SectionHeading from "./SectionHeading";
+import LangToggle from "./LangToggle";
 import { Ic, ChipIcon, Check } from "./Icons";
-import { chips, dashboardKpis, dashboardPages, dashboardAbout, PBIX_BLOB, PBIX_RAW, EMAIL } from "../data";
+import { chips, dashboardKpiValues, dashboardImages, dashboardAboutIcons, PBIX_BLOB, PBIX_RAW, EMAIL } from "../data";
+import { useContent, useLang, rememberLanguageOnce } from "../i18n";
 
 const tools = chips.filter(([n]) => n === "Power BI").concat([["DAX", "#1A5B8A"], ["Power Query", "#1D6F42"], ["SQL Server", "#9B2C2C"]]);
 
 export default function DashboardPage() {
+  const all = useContent();
+  const { lang } = useLang();
+  const c = all.dash;
   const [i, setI] = useState(0);
   const [zoom, setZoom] = useState(false);
-  const p = dashboardPages[i];
+  const p = c.pages[i];
+  const img = dashboardImages[i];
 
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && setZoom(false);
@@ -22,17 +28,20 @@ export default function DashboardPage() {
         <div className="w">
           <a className="brand" href="#home">
             <span className="av">JA</span>
-            <span><b>Jeny Azrad</b><small>Data Analyst</small></span>
+            <span><b>{all.name}</b><small>{all.role}</small></span>
           </a>
-          <a className="back" href="#projects">← Back to portfolio</a>
+          <div className="nav-right">
+            <LangToggle />
+            <a className="back" href="./" onClick={() => rememberLanguageOnce(lang)}>{c.back}</a>
+          </div>
         </div>
       </nav>
 
       <header className="dp-hero dark">
         <div className="w">
-          <p className="hi">FEATURED PROJECT · POWER BI</p>
-          <h1>Amazon E-Commerce<span>Power BI Dashboard</span></h1>
-          <p className="lead">An interactive 6-page dashboard analyzing sales, customers, products, delivery and trends, with DAX measures, KPI analysis and a sales forecast.</p>
+          <p className="hi">{c.kicker}</p>
+          <h1>{c.title}<span>{c.subtitle}</span></h1>
+          <p className="lead">{c.lead}</p>
           <div className="chips">
             {tools.map(([name, bg, fg]) => (
               <span key={name} className="chip" style={{ background: bg, color: fg || "#fff" }}>
@@ -41,36 +50,36 @@ export default function DashboardPage() {
             ))}
           </div>
           <div className="cta">
-            <a className="btn" href={PBIX_RAW}>Download .pbix ↓</a>
-            <a className="btn o" href={PBIX_BLOB} target="_blank" rel="noopener">View on GitHub →</a>
+            <a className="btn" href={PBIX_RAW}>{c.download}</a>
+            <a className="btn o" href={PBIX_BLOB} target="_blank" rel="noopener">{c.github}</a>
           </div>
-          <p className="dp-note">Opening the .pbix file requires Power BI Desktop (Windows). Browse the pages below, no download needed.</p>
+          <p className="dp-note">{c.note}</p>
           <div className="dp-kpis">
-            {dashboardKpis.map(([v, l]) => <div key={l} className="dp-kpi"><b>{v}</b><span>{l}</span></div>)}
+            {dashboardKpiValues.map((v, k) => <div key={v} className="dp-kpi"><b>{v}</b><span>{c.kpis[k]}</span></div>)}
           </div>
         </div>
       </header>
 
       <section>
         <div className="w">
-          <SectionHeading n="01" t="Dashboard Pages" />
-          <p className="sub">Choose a page to explore it. Select the image to view it full size.</p>
+          <SectionHeading n="01" t={c.galleryTitle} />
+          <p className="sub">{c.gallerySub}</p>
           <div className="dp-tabs" role="tablist">
-            {dashboardPages.map((d, k) => (
-              <button key={d.label} role="tab" aria-selected={k === i} className={"dp-tab" + (k === i ? " on" : "")} onClick={() => setI(k)}>
+            {c.pages.map((d, k) => (
+              <button key={k} role="tab" aria-selected={k === i} className={"dp-tab" + (k === i ? " on" : "")} onClick={() => setI(k)}>
                 <i>{k + 1}</i>{d.label}
               </button>
             ))}
           </div>
           <div className="dp-view">
             <div className="dp-info">
-              <span className="dp-num">PAGE {i + 1} / {dashboardPages.length}</span>
+              <span className="dp-num">{c.pageOf(i + 1, c.pages.length)}</span>
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
               <ul>{p.points.map((x) => <li key={x}><Check />{x}</li>)}</ul>
             </div>
-            <button className="dp-shot" onClick={() => setZoom(true)} aria-label="View full size">
-              <img src={p.img} alt={`${p.title} – Power BI dashboard page`} />
+            <button className="dp-shot" onClick={() => setZoom(true)} aria-label={all.ui.fullSize}>
+              <img src={img} alt={p.title} />
             </button>
           </div>
         </div>
@@ -78,31 +87,31 @@ export default function DashboardPage() {
 
       <section>
         <div className="w">
-          <SectionHeading n="02" t="About the Analysis" />
+          <SectionHeading n="02" t={c.aboutTitle} />
           <div className="dp-about">
-            {dashboardAbout.map(([icon, title, text]) => (
-              <div key={title} className="card"><Ic n={icon} p /><h3>{title}</h3><p>{text}</p></div>
+            {c.about.map(([title, text], k) => (
+              <div key={title} className="card"><Ic n={dashboardAboutIcons[k]} p /><h3>{title}</h3><p>{text}</p></div>
             ))}
           </div>
-          <p className="dp-note2">The insights summarize patterns observed in the report and are not causal conclusions.</p>
+          <p className="dp-note2">{c.aboutNote}</p>
         </div>
       </section>
 
       <section className="dark">
         <div className="w conn">
-          <p>Want to explore the data model and DAX measures? Download the .pbix file, or get in touch and I will walk you through it.</p>
+          <p>{c.ctaText}</p>
           <div className="cta">
-            <a className="btn" href={PBIX_RAW}>Download .pbix ↓</a>
-            <a className="btn o" href={"mailto:" + EMAIL}>Email →</a>
-            <a className="btn o" href="#projects">← Back to portfolio</a>
+            <a className="btn" href={PBIX_RAW}>{c.download}</a>
+            <a className="btn o" href={"mailto:" + EMAIL}>{c.email}</a>
+            <a className="btn o" href="./" onClick={() => rememberLanguageOnce(lang)}>{c.back}</a>
           </div>
         </div>
       </section>
 
       {zoom && (
         <div className="dp-zoom" role="dialog" aria-modal="true" onClick={() => setZoom(false)}>
-          <img src={p.img} alt={p.title} />
-          <button aria-label="Close">×</button>
+          <img src={img} alt={p.title} />
+          <button aria-label={all.ui.close}>×</button>
         </div>
       )}
     </div>

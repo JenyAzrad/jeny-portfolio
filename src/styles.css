@@ -101,3 +101,22 @@ footer a:hover{color:var(--or)}
 .sl-dots button{width:7px;height:7px;padding:0;border:0;border-radius:4px;background:rgba(255,255,255,.55);cursor:pointer;transition:width .2s}.sl-dots button.on{width:18px;background:var(--or)}
 @media(prefers-reduced-motion:reduce){.shot.sl img,.sl-dots button{transition:none}}
 .sl-btn svg{display:block;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.nav-right{display:flex;align-items:center;gap:14px}
+.lang-btn{padding:6px 12px;border:1px solid var(--ice);border-radius:8px;background:transparent;color:#fff;font:600 12px Inter,system-ui,sans-serif;cursor:pointer}
+.lang-btn:hover{background:var(--or);border-color:var(--or);color:var(--navy)}
+.sign{text-align:end}.shot.sl{direction:ltr}
+html[lang="he"] body,html[lang="he"] button,html[lang="he"] .lang-btn{font-family:Heebo,Inter,system-ui,sans-serif}
+html[lang="he"] .lang-btn{font-family:Inter,system-ui,sans-serif}
+html[lang="he"] .hi,html[lang="he"] .dp-num,html[lang="he"] .tli h4{letter-spacing:0}
+html[lang="he"] .note,html[lang="he"] .sign{font-family:Heebo,sans-serif;font-style:italic;font-weight:500}
+[dir="rtl"] .hero::before{left:auto;right:-90px}
+[dir="rtl"] .dots{left:auto;right:62%}
+[dir="rtl"] .note{right:auto;left:-56px;text-align:left;transform:rotate(8deg);font-size:19px}
+[dir="rtl"] .sq{right:auto;left:4px}
+[dir="rtl"] .tli{padding:0 56px 28px 0}[dir="rtl"] .tli:last-child{padding-bottom:0}
+[dir="rtl"] .tli .ic{left:auto;right:0}
+[dir="rtl"] .tli:not(:last-child)::before{left:auto;right:17px}
+[dir="rtl"] .dp-zoom button{right:auto;left:16px}
+[dir="rtl"] .note{display:none}
+/* English labels with icons keep the icon on the left, also in the Hebrew version */
+[dir="rtl"] .chip,[dir="rtl"] .pc .tags span{direction:ltr}

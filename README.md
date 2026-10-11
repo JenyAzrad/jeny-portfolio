@@ -31,9 +31,11 @@ npm run build    # production build in /dist
 ```
 src/
   components/   Navbar, Hero, About, Skills, Projects, Background, Contact...
-  data.js       projects, skills, links and timeline content
+  data.js       links, icons, images and colors
+  content/      all visible text: en.js (English) and he.js (Hebrew)
+  i18n.jsx      language switcher (EN / HE, saved in the browser)
   styles.css    all styling
-public/         resume PDF
+public/         resume PDFs (EN + HE)
 ```
 
 ## Contact

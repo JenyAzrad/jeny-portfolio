@@ -1,25 +1,26 @@
 import SectionHeading from "./SectionHeading";
 import { Ic, FigmaLogo } from "./Icons";
-import { skills } from "../data";
+import { skillIcons } from "../data";
+import { useContent } from "../i18n";
 
 export default function Skills() {
+  const c = useContent().skills;
   return (
     <div id="skills">
-      <SectionHeading n="02" t="Skills" />
-      <p className="sub">A combination of technical skills and visual thinking.</p>
+      <SectionHeading n="02" t={c.title} />
+      <p className="sub">{c.sub}</p>
       <div className="grid">
-        {skills.map(([icon, title, lines]) => (
+        {c.items.map(([title, lines], i) => (
           <div key={title} className="card sk">
-            <div className="skh"><Ic n={icon} /><h3>{title}</h3></div>
+            <div className="skh"><Ic n={skillIcons[i]} /><h3>{title}</h3></div>
             {lines.map((l) => <p key={l}>{l}</p>)}
           </div>
         ))}
       </div>
       <div className="card also">
-        <b>Also experienced in:</b>
+        <b>{c.also}</b>
         <span className="fg"><FigmaLogo />Figma</span>
-        <span>UX/UI</span>
-        <span>Visual Design</span>
+        {c.alsoItems.map((x) => <span key={x}>{x}</span>)}
       </div>
     </div>
   );

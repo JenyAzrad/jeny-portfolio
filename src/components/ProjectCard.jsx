@@ -1,6 +1,6 @@
 import { Ic, Check } from "./Icons";
-import { tagColors } from "../data";
 import Slider from "./Slider";
+import { tagColors } from "../data";
 
 export default function ProjectCard({ icon, title, subtitle, tags, desc, keywords, img, images, url, cta }) {
   // links that start with "#/" open a page inside this site
@@ -15,12 +15,12 @@ export default function ProjectCard({ icon, title, subtitle, tags, desc, keyword
       {images && images.length > 1 ? (
         <Slider images={images} alt={`${title} – ${subtitle}`} />
       ) : (
-        <div className="shot"><img src={img} alt={`${title} – ${subtitle} preview`} loading="lazy" /></div>
+        <div className="shot"><img src={img} alt={`${title} – ${subtitle}`} loading="lazy" /></div>
       )}
       <p>{desc}</p>
       <ul className="kw">{keywords.map((k) => <li key={k}><Check />{k}</li>)}</ul>
       <div className="cta">
-        <a className="btn s" href={url} {...(internal ? {} : { target: "_blank", rel: "noopener" })}>{cta} →</a>
+        <a className="btn s" href={url} {...(internal ? {} : { target: "_blank", rel: "noopener" })}>{cta}</a>
       </div>
     </article>
   );
