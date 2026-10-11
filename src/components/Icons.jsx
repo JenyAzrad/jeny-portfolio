@@ -38,3 +38,7 @@ export const FigmaLogo = () => (
     <path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" />
   </svg>
 );
+
+export const Check = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10" /></svg>
+);

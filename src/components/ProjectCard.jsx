@@ -1,11 +1,10 @@
-import { Ic } from "./Icons";
+import { Ic, Check } from "./Icons";
 import { tagColors } from "../data";
+import Slider from "./Slider";
 
-const Check = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10" /></svg>
-);
-
-export default function ProjectCard({ icon, title, subtitle, tags, desc, keywords, img, url, cta }) {
+export default function ProjectCard({ icon, title, subtitle, tags, desc, keywords, img, images, url, cta }) {
+  // links that start with "#/" open a page inside this site
+  const internal = url.startsWith("#/");
   return (
     <article className="pc">
       <div className="ph">
@@ -13,11 +12,15 @@ export default function ProjectCard({ icon, title, subtitle, tags, desc, keyword
         <div><h3>{title}</h3><small>{subtitle}</small></div>
       </div>
       <div className="tags">{tags.map((t) => <span key={t} style={{ "--c": tagColors[t] }}>{t}</span>)}</div>
-      <div className="shot"><img src={img} alt={`${title} – ${subtitle} preview`} loading="lazy" /></div>
+      {images && images.length > 1 ? (
+        <Slider images={images} alt={`${title} – ${subtitle}`} />
+      ) : (
+        <div className="shot"><img src={img} alt={`${title} – ${subtitle} preview`} loading="lazy" /></div>
+      )}
       <p>{desc}</p>
       <ul className="kw">{keywords.map((k) => <li key={k}><Check />{k}</li>)}</ul>
       <div className="cta">
-        <a className="btn s" href={url} target="_blank" rel="noopener">{cta} →</a>
+        <a className="btn s" href={url} {...(internal ? {} : { target: "_blank", rel: "noopener" })}>{cta} →</a>
       </div>
     </article>
   );

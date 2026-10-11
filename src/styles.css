@@ -77,3 +77,27 @@ footer a:hover{color:var(--or)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
 .why .card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px 16px}.why .ic{margin:0 auto 12px}
 .btn,.conn .btn{border-width:1px}.pc .tags span{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;font-weight:500;background:color-mix(in srgb,var(--c,#4FA3E8) 18%,transparent);border:1px solid color-mix(in srgb,var(--c,#4FA3E8) 50%,transparent);color:color-mix(in srgb,var(--c,#4FA3E8) 45%,#fff)}.pc .tags span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c,#4FA3E8)}
+.back{font-size:13px;font-weight:500;color:var(--ice)}.back:hover{color:var(--or)}
+.dp-hero{padding:64px 0 56px}.dp-hero .lead{max-width:640px}.dp-note{font-size:12px;color:var(--ice);margin:14px 0 0}
+.dp-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+.dp-kpi{background:var(--navy2);border:1px solid var(--blue);border-radius:12px;padding:16px 18px}.dp-kpi b{display:block;font-size:26px;color:#fff}.dp-kpi span{font-size:12px;color:var(--ice)}
+.dp-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:20px}
+.dp-tab{flex:none;display:inline-flex;gap:8px;align-items:center;padding:9px 16px;border:1px solid var(--bd);border-radius:8px;background:#fff;color:var(--ink);font:600 13px Inter,system-ui,sans-serif;cursor:pointer}
+.dp-tab i{font-style:normal;color:var(--or);font-size:11px}.dp-tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.dp-view{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
+.dp-num{color:var(--or);font-weight:700;font-size:12px;letter-spacing:.06em}.dp-info h3{margin:6px 0 8px;font-size:20px}.dp-info p{margin:0 0 16px;color:var(--grey);font-size:14px}
+.dp-info ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;font-size:13px}.dp-info li{display:flex;gap:8px;align-items:flex-start}
+.dp-info svg{width:14px;height:14px;flex:none;margin-top:3px;fill:none;stroke:var(--or);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.dp-shot{display:block;width:100%;padding:0;border:1px solid var(--bd);border-radius:12px;overflow:hidden;background:var(--navy);cursor:zoom-in;box-shadow:0 12px 32px rgba(8,43,76,.15)}.dp-shot img{display:block;width:100%;height:auto}
+.dp-about{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.dp-note2{font-size:12px;color:var(--grey);margin:16px 0 0}
+.dp-zoom{position:fixed;inset:0;z-index:50;background:rgba(4,20,38,.92);display:grid;place-items:center;padding:24px;cursor:zoom-out}.dp-zoom img{max-width:100%;max-height:100%;border-radius:8px}
+.dp-zoom button{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--ice);background:transparent;color:#fff;font-size:22px;cursor:pointer}
+@media(max-width:900px){.dp-view{grid-template-columns:1fr}.dp-kpis,.dp-about{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.dp-about{grid-template-columns:1fr}}
+.shot.sl{position:relative}.shot.sl img{position:absolute;inset:0;opacity:0;transition:opacity .6s}.shot.sl img.on{opacity:1}
+.sl-btn{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;padding:0;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(8,43,76,.7);color:#fff;font-size:18px;line-height:1;cursor:pointer}
+.sl-btn.prev{left:8px}.sl-btn.next{right:8px}.sl-btn:hover{background:var(--or);border-color:var(--or);color:var(--navy)}
+.sl-dots{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;gap:6px;padding:5px 9px;border-radius:10px;background:rgba(8,43,76,.6)}
+.sl-dots button{width:7px;height:7px;padding:0;border:0;border-radius:4px;background:rgba(255,255,255,.55);cursor:pointer;transition:width .2s}.sl-dots button.on{width:18px;background:var(--or)}
+@media(prefers-reduced-motion:reduce){.shot.sl img,.sl-dots button{transition:none}}
+.sl-btn svg{display:block;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
